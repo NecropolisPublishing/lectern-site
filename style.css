@@ -138,7 +138,7 @@ section h2 { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); f
 .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
 
 /* ============ Features page (compartmentalized) ============ */
-.tier-banner { text-align: center; margin: 8px auto 4px; }
+.tier-banner { text-align: center; margin: 8px auto 36px; }
 .tier-banner .t-name { font-family: var(--display); font-size: clamp(26px, 4vw, 38px); color: var(--ink); }
 .tier-banner .t-sub { color: var(--ink-dim); font-style: italic; font-size: 16.5px; max-width: 640px; margin: 10px auto 0; }
 .fgroup {
