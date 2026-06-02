@@ -7,19 +7,28 @@
 <meta name="description" content="Privacy Policy for Lectern, a local-first desktop writing application by Necropolis Publishing, LLC.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <nav>
-    <a href="index.html" class="brand">Lectern<small>by Necropolis Publishing</small></a>
+    <a href="index.html" class="brand" aria-label="Lectern home">
+      <svg class="brand-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+           fill="none" stroke="#b08a4a" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M100 36 C82 28, 58 26, 38 32 L38 96 C58 90, 82 92, 100 100 C118 92, 142 90, 162 96 L162 32 C142 26, 118 28, 100 36 Z" />
+        <path d="M100 44 L100 100" /><path d="M30 104 L170 104 L162 124 L38 124 Z" />
+        <path d="M88 124 C90 144, 84 164, 74 176 L126 176 C116 164, 110 144, 112 124" />
+        <rect x="58" y="176" width="84" height="14" rx="7" />
+      </svg>
+      <span class="brand-word">Lectern</span>
+    </a>
     <ul class="nav-links">
-      <li><a href="index.html#lectern">Features</a></li>
+      <li><a href="features.html">Features</a></li>
       <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="download.html" class="nav-cta">Download</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
   </nav>
 </header>
@@ -116,19 +125,18 @@
   <h2>Contact</h2>
   <p>
     Questions about privacy? Email
-    <a href="mailto:necropolispublishing@gmail.com">necropolispublishing@gmail.com</a>.
+    <a href="mailto:contact@necropolispublishing.com">contact@necropolispublishing.com</a>.
   </p>
 </div>
 
 <footer>
   <ul class="footer-links">
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="terms.html">Terms of Service</a></li>
-    <li><a href="privacy.html">Privacy Policy</a></li>
-    <li><a href="refund.html">Refund Policy</a></li>
-    <li><a href="mailto:necropolispublishing@gmail.com">Contact</a></li>
+    <li><a href="features.html">Features</a></li><li><a href="pricing.html">Pricing</a></li>
+    <li><a href="download.html">Download</a></li><li><a href="about.html">About</a></li>
+    <li><a href="terms.html">Terms</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="refund.html">Refund</a></li>
   </ul>
-  <p>© 2026 Necropolis Publishing, LLC. All rights reserved.</p>
+  <p>&copy; 2026 Necropolis Publishing, LLC. All rights reserved.</p>
+  <p><a href="mailto:contact@necropolispublishing.com">contact@necropolispublishing.com</a></p>
 </footer>
 
 </body>
