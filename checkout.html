@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing — Lectern</title>
-<meta name="description" content="Lectern pricing. A free tier, and a one-time Pro license. Founder's Edition $29, lifetime license, all future updates. Buy once. Yours forever.">
+<title>Checkout — Lectern</title>
+<meta name="description" content="Complete your Lectern Pro purchase. Founder's Edition — a one-time, lifetime license. Buy once. Yours forever.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
 <body>
 
@@ -34,41 +35,18 @@
 </header>
 
 <div class="page-head">
-  <p class="eyebrow">Pricing</p>
-  <h1>Buy once. Yours forever.</h1>
-  <p class="lede">No subscriptions. No servers. No cloud lock-in.</p>
+  <p class="eyebrow">Checkout</p>
+  <h1>Lectern Pro</h1>
+  <p class="lede">Founder's Edition — a one-time, lifetime license.</p>
 </div>
 
 <section>
-  <div class="pricing-grid">
-
-    <div class="price-card">
-      <p class="price-tier">Free</p>
-      <p class="price-sub">The writing surface, free for everyone.</p>
-      <p class="price-amount">$0</p>
-      <p class="price-note">Free forever.</p>
-      <ul class="price-features">
-        <li>Book Mode — your manuscript as real, bordered pages</li>
-        <li>Living markdown — formatting renders as you type</li>
-        <li>Typewriter scrolling &amp; Tranquility mode</li>
-        <li>Smart typography — curly quotes, em dashes, auto-capitals</li>
-        <li>Spellcheck with your own correction list</li>
-        <li>Writer's dashboard — live word, page &amp; daily-goal counts</li>
-        <li>Project-wide find &amp; replace, with preview and backups</li>
-        <li>Living outline with drag-and-drop reordering</li>
-        <li>Version snapshots — a quiet backup before every save</li>
-        <li>3 themes, 7 typefaces, full page styling</li>
-        <li>Reassign every keyboard shortcut</li>
-        <li>Markdown-native — plain files on your disk. No cloud lock-in.</li>
-      </ul>
-      <span class="btn disabled" aria-disabled="true">Download — coming soon</span>
-    </div>
-
+  <div class="pricing-grid" style="grid-template-columns: 1fr; max-width: 560px;">
     <div class="price-card featured">
       <p class="price-tier">Lectern Pro</p>
       <p class="price-sub">Founder's Edition — for writers who go all in.</p>
       <p class="price-amount">$29</p>
-      <p class="price-note">Founder's price during pre-order &amp; beta.</p>
+      <p class="price-note">One-time payment. Lifetime license. All future updates included.</p>
       <ul class="price-features">
         <li class="heading">Everything in Free, plus &mdash;</li>
         <li>Compendium — people, places &amp; lore, shared across a series</li>
@@ -81,12 +59,13 @@
         <li>Theme studio — tune every element, save &amp; carry your designs</li>
         <li>Lifetime license — all future updates included</li>
       </ul>
-      <a class="btn primary" href="checkout.html">Buy Lectern Pro — $29</a>
+      <button class="btn primary" id="buy-btn">Buy Lectern Pro — $29</button>
+      <p class="price-note" id="status-msg" style="margin-top: 16px; text-align: center; min-height: 0;"></p>
     </div>
-
   </div>
 
   <p class="byok-note">
+    Your license key is delivered by email the moment your payment clears.
     AI assistance is optional and uses your own API key — you connect your
     OpenRouter account and pay that provider directly. Lectern never hosts or
     generates content itself, and never touches your key beyond your own device.
@@ -104,6 +83,33 @@
   <p>&copy; 2026 Necropolis Publishing, LLC. All rights reserved.</p>
   <p><a href="mailto:contact@necropolispublishing.com">contact@necropolispublishing.com</a></p>
 </footer>
+
+<script>
+  const PADDLE_TOKEN = "live_08b35ef8fdfacc14cbcd0575913";
+  const PRICE_ID     = "pri_01kt5bhpt4n9fdhagp9538hx3n";
+  const SUCCESS_URL  = "https://lectern.necropolispublishing.com/success.html";
+
+  const statusMsg = document.getElementById("status-msg");
+  const buyBtn    = document.getElementById("buy-btn");
+
+  try {
+    Paddle.Environment.set("production");
+    Paddle.Initialize({ token: PADDLE_TOKEN });
+  } catch (e) {
+    statusMsg.textContent = "Checkout failed to load. Please refresh the page.";
+  }
+
+  buyBtn.addEventListener("click", function () {
+    statusMsg.textContent = "";
+    Paddle.Checkout.open({
+      items: [{ priceId: PRICE_ID, quantity: 1 }],
+      settings: {
+        displayMode: "overlay",
+        successUrl: SUCCESS_URL
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
