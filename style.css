@@ -89,8 +89,8 @@ nav {
 .hero-title .tm { font-family: var(--body); font-size: .26em; vertical-align: super; opacity: .6; margin-left: 4px; letter-spacing: 0; }
 .hero-tagline { font-style: italic; color: #7d7b74; font-size: clamp(17px, 2.2vw, 21px); margin: 14px 0 0; opacity: 0; animation: rise .9s ease .3s forwards; }
 .welcome-line {
-  display: flex; align-items: center; justify-content: center; gap: 16px;
-  width: min(660px, 90%); margin: 30px auto 0; color: var(--accent);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: min(420px, 80%); margin: 30px auto 0; color: var(--accent);
   user-select: none; pointer-events: none; opacity: 0; animation: rise .9s ease .42s forwards;
 }
 .welcome-line .leaf { font-size: 19px; line-height: 1; }
