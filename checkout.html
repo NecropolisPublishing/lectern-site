@@ -1,15 +1,34 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     PADDLE STANDBY CHECKOUT — CURRENTLY INERT.
+     Stripe is the live payment path. This page is the backup in
+     case Stripe falls through. While on standby it (1) redirects
+     to pricing.html, (2) is noindexed, and (3) loads no Paddle
+     code, so no purchase can occur through an unfulfilled path.
+
+     TO ACTIVATE PADDLE:
+       1. Delete the <meta http-equiv="refresh"> line below.
+       2. Delete the <meta name="robots"> line below.
+       3. Uncomment the paddle.js <script> tag in <head>.
+       4. Uncomment the checkout <script> block before </body>.
+       5. Wire the Paddle webhook to the license signer, then
+          test one live purchase end-to-end before linking here.
+     ============================================================ -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=pricing.html">
+<meta name="robots" content="noindex, nofollow">
 <title>Checkout — Lectern</title>
 <meta name="description" content="Complete your Lectern Pro purchase. Founder's Edition — a one-time, lifetime license. Buy once. Yours forever.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- STANDBY: uncomment on Paddle activation.
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+-->
 </head>
 <body>
 
@@ -84,6 +103,7 @@
   <p><a href="mailto:contact@necropolispublishing.com">contact@necropolispublishing.com</a></p>
 </footer>
 
+<!-- STANDBY: uncomment on Paddle activation.
 <script>
   const PADDLE_TOKEN = "live_08b35ef8fdfacc14cbcd0575913";
   const PRICE_ID     = "pri_01kt5bhpt4n9fdhagp9538hx3n";
@@ -110,6 +130,7 @@
     });
   });
 </script>
+-->
 
 </body>
 </html>
