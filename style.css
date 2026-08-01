@@ -91,7 +91,9 @@ nav {
 .crumb:hover { border: none; }
 .crumb-icon { width: 26px; height: 26px; display: block; }
 .crumb-word { font-size: 20px; letter-spacing: .04em; color: var(--ink); line-height: 1; transition: color .2s; }
-.crumb-np .crumb-word { font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif; text-transform: uppercase; letter-spacing: .09em; }
+.crumb-np .crumb-word { font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif; letter-spacing: .06em; }  /* Reads 'Home', not 'HOME': the uppercase here dated from when this
+     crumb carried the Necropolis wordmark. Letter-spacing eased to suit a
+     word rather than a mark. */
 .crumb-lectern .crumb-word { font-family: var(--display); }
 .crumb:hover .crumb-word { color: var(--accent-bright); }
 .crumb-sep { color: var(--accent); font-size: 20px; line-height: 1; opacity: .6; user-select: none; }
