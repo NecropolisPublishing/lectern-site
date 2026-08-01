@@ -28,22 +28,19 @@
   --accent: #b7904e;
   --accent-bright: #c49b5c;
   --accent-soft: rgba(183, 144, 78, 0.14);
-  /* Ink and gold for anything sitting ON the cream. Gold has to go deeper
-     there than it does on cobalt to stay legible, and the ink is the cobalt
-     from Lectern Light, so the two surfaces trade colors rather than
-     introducing a third family. */
+  /* Ink for anything sitting ON the cream. It is the cobalt from Lectern
+     Light, so the two surfaces trade colors rather than introducing a third
+     family. */
   --paper-ink: #2b394a;
   --paper-ink-soft: #384556;
   --paper-ink-dim: #45505f;
   --paper-ink-faint: #47515f;
-  --paper-gold: #7d5a20;
-  /* Text-weight gold for the cream surfaces: links, eyebrows, the price
-     figure. The lighter --paper-gold is fine for rules, borders, and fills,
-     but it lands at 3.7:1 as type, so anything read as words uses this. */
-  --paper-gold-deep: #664616;
-  --paper-gold-soft: rgba(125, 90, 32, 0.12);
+  /* Not a color anything is painted in: gold on cream keeps the site's real
+     gold, and this darker tone rides underneath it as a hairline shadow at
+     zero offset, which is what separates the gold from the cream. */
+  --paper-halo: #7d5a20;
   --paper-border: rgba(43, 57, 74, 0.16);
-  --hero-gray: var(--paper-gold);
+  --hero-gray: var(--accent);
   /* Borders and shadow are parchment-tinted rather than pure white or pure
      black, so edges sit on the ground instead of cutting across it. */
   --border: rgba(220, 212, 196, 0.10);
@@ -131,26 +128,47 @@ nav {
   --ink-soft: var(--paper-ink-soft);
   --ink-dim: var(--paper-ink-dim);
   --ink-faint: var(--paper-ink-faint);
-  --accent: var(--paper-gold);
-  --accent-bright: var(--paper-gold-deep);
-  --accent-soft: var(--paper-gold-soft);
   --border: var(--paper-border);
-  --selection: rgba(125, 90, 32, 0.22);
+  --selection: rgba(183, 144, 78, 0.30);
   color: var(--paper-ink);
 }
-/* The primary button is a filled gold block; on cobalt its label is the page
-   color, which on cream would be gold-on-cream at 2.7:1. Give it cream type
-   instead. */
+/* Gold on cream is a close value match, so every gold mark on a cream surface
+   carries a 1px shadow at zero offset in --paper-halo. It reads as a drawn
+   edge rather than a shadow, and it is what keeps the light gold from
+   dissolving into the paper. Text takes text-shadow; the 2px ornament rules
+   are backgrounds, so they take box-shadow. */
+.hero .hero-title,
+.hero .welcome-line,
+.hero a,
+.intro-card a,
+.fgroup a,
+.price-card a,
+.dl-card a,
+.fgroup .group-eyebrow,
+.price-card .price-amount,
+.hero .pill,
+.intro-card .pill,
+.price-card .pill,
+.intro-card .bullets li::before,
+.price-card .price-features li::before,
+.intro-card .ornament,
+.fgroup .ornament,
+.price-card .ornament,
+.dl-card .ornament { text-shadow: 0 0 1px var(--paper-halo); }
+
+.hero .welcome-line .rule,
+.intro-card .ornament .rule,
+.fgroup .ornament .rule,
+.price-card .ornament .rule,
+.dl-card .ornament .rule { box-shadow: 0 0 1px var(--paper-halo); }
+
+/* The filled primary button keeps page-color type on gold, which is 4.8:1 and
+   needs no halo; the outline button's label is ink, so it needs none either. */
 .hero .btn.primary,
 .intro-card .btn.primary,
 .fgroup .btn.primary,
 .price-card .btn.primary,
-.dl-card .btn.primary { color: #f2ead9; }
-.hero .btn.primary:hover,
-.intro-card .btn.primary:hover,
-.fgroup .btn.primary:hover,
-.price-card .btn.primary:hover,
-.dl-card .btn.primary:hover { color: var(--paper-gold); }
+.dl-card .btn.primary { color: var(--bg); text-shadow: none; }
 
 /* ============ Hero (home: matches app welcome screen) ============ */
 .hero {
