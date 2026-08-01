@@ -13,10 +13,14 @@
    ============================================================ */
 
 :root {
-  --bg: #1e252e;
-  --bg-hero: #232b35;
-  --bg-card: #242c36;
-  --bg-elevated: #2b343f;
+  --bg: #232b35;
+  /* Hero band and every card share one darker muted cream, so the page reads
+     as paper laid on a cobalt desk. Card backgrounds were a two-stop gradient;
+     both stops are the same cream now, which flattens it without touching the
+     rules that reference them. */
+  --bg-hero: #d0c6ae;
+  --bg-card: #d0c6ae;
+  --bg-elevated: #d0c6ae;
   --ink: #dcd4c4;
   --ink-soft: #bdb6a8;
   --ink-dim: #a09a8d;
@@ -24,13 +28,22 @@
   --accent: #b7904e;
   --accent-bright: #c49b5c;
   --accent-soft: rgba(183, 144, 78, 0.14);
-  /* Dimmed cream. Ornament, eyebrows, and the hero wordmark sit on this
-     instead of gold, which lifts the page without touching the cobalt ground.
-     Held a shade under --ink so it reads as a quieter light, not brighter
-     type. Gold stays on everything clickable so a link still looks like one. */
-  --cream: #d5cbb4;
-  --cream-soft: rgba(213, 203, 180, 0.10);
-  --hero-gray: var(--cream);
+  /* Ink and gold for anything sitting ON the cream. Gold has to go deeper
+     there than it does on cobalt to stay legible, and the ink is the cobalt
+     from Lectern Light, so the two surfaces trade colors rather than
+     introducing a third family. */
+  --paper-ink: #2b394a;
+  --paper-ink-soft: #384556;
+  --paper-ink-dim: #45505f;
+  --paper-ink-faint: #47515f;
+  --paper-gold: #7d5a20;
+  /* Text-weight gold for the cream surfaces: links, eyebrows, the price
+     figure. The lighter --paper-gold is fine for rules, borders, and fills,
+     but it lands at 3.7:1 as type, so anything read as words uses this. */
+  --paper-gold-deep: #664616;
+  --paper-gold-soft: rgba(125, 90, 32, 0.12);
+  --paper-border: rgba(43, 57, 74, 0.16);
+  --hero-gray: var(--paper-gold);
   /* Borders and shadow are parchment-tinted rather than pure white or pure
      black, so edges sit on the ground instead of cutting across it. */
   --border: rgba(220, 212, 196, 0.10);
@@ -65,7 +78,7 @@ a:hover { border-bottom-color: var(--accent); }
 header {
   position: sticky; top: 0; z-index: 100;
   backdrop-filter: blur(14px);
-  background: rgba(30, 37, 46, 0.82);
+  background: rgba(35, 43, 53, 0.84);
   border-bottom: 1px solid var(--border);
 }
 nav {
@@ -81,7 +94,7 @@ nav {
 .crumb-np .crumb-word { font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif; text-transform: uppercase; letter-spacing: .09em; }
 .crumb-lectern .crumb-word { font-family: var(--display); }
 .crumb:hover .crumb-word { color: var(--accent-bright); }
-.crumb-sep { color: var(--cream); font-size: 20px; line-height: 1; opacity: .6; user-select: none; }
+.crumb-sep { color: var(--accent); font-size: 20px; line-height: 1; opacity: .6; user-select: none; }
 .nav-links { display: flex; gap: 28px; align-items: center; list-style: none; margin: 0; padding: 0; }
 .nav-links a { color: var(--ink-soft); font-size: 15px; letter-spacing: .03em; border: none; }
 .nav-links a:hover { color: var(--accent-bright); border: none; }
@@ -94,10 +107,46 @@ nav {
   .nav-links a { font-size: 15px; }
 }
 
+/* ============ Cream surfaces ============
+   The hero band and the four card types are cream; everything else is cobalt.
+   Rather than restate a color on each rule inside them, these blocks redefine
+   the ink, gold, and border tokens at the container. Custom properties
+   inherit, so every descendant picks the paper values up on its own and the
+   rules below stay written once. */
+.hero,
+.intro-card,
+.fgroup,
+.price-card,
+.dl-card {
+  --ink: var(--paper-ink);
+  --ink-soft: var(--paper-ink-soft);
+  --ink-dim: var(--paper-ink-dim);
+  --ink-faint: var(--paper-ink-faint);
+  --accent: var(--paper-gold);
+  --accent-bright: var(--paper-gold-deep);
+  --accent-soft: var(--paper-gold-soft);
+  --border: var(--paper-border);
+  --selection: rgba(125, 90, 32, 0.22);
+  color: var(--paper-ink);
+}
+/* The primary button is a filled gold block; on cobalt its label is the page
+   color, which on cream would be gold-on-cream at 2.7:1. Give it cream type
+   instead. */
+.hero .btn.primary,
+.intro-card .btn.primary,
+.fgroup .btn.primary,
+.price-card .btn.primary,
+.dl-card .btn.primary { color: #f2ead9; }
+.hero .btn.primary:hover,
+.intro-card .btn.primary:hover,
+.fgroup .btn.primary:hover,
+.price-card .btn.primary:hover,
+.dl-card .btn.primary:hover { color: var(--paper-gold); }
+
 /* ============ Hero (home: matches app welcome screen) ============ */
 .hero {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(213, 203, 180, 0.06), transparent 62%),
+    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(125, 90, 32, 0.07), transparent 62%),
     var(--bg-hero);
   border-bottom: 1px solid var(--border);
   padding: clamp(48px, 8vw, 64px) clamp(20px, 5vw, 32px) clamp(44px, 7vw, 60px);
@@ -115,23 +164,23 @@ nav {
 .hero-tagline { font-style: italic; color: var(--ink-dim); font-size: clamp(17px, 2.2vw, 21px); margin: 14px 0 0; opacity: 0; animation: rise .9s ease .3s forwards; }
 .welcome-line {
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: min(420px, 80%); margin: 30px auto 0; color: var(--cream);
+  width: min(420px, 80%); margin: 30px auto 0; color: var(--accent);
   user-select: none; pointer-events: none; opacity: 0; animation: rise .9s ease .42s forwards;
 }
 .welcome-line .leaf { font-size: 19px; line-height: 1; }
-.welcome-line .rule { flex: 1; height: 2px; background: var(--cream); opacity: .85; }
+.welcome-line .rule { flex: 1; height: 2px; background: var(--accent); opacity: .92; }
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ============ Page heads (interior pages) ============ */
 .page-head { max-width: var(--maxw); margin: 0 auto; padding: clamp(48px, 8vw, 60px) clamp(20px, 5vw, 34px) 8px; text-align: center; }
-.eyebrow { color: var(--cream); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; margin: 0 0 12px; }
+.eyebrow { color: var(--accent-bright); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; margin: 0 0 12px; }
 .page-head h1 { font-family: var(--display); font-size: clamp(30px, 4.6vw, 46px); font-weight: 400; color: var(--ink); margin: 0; letter-spacing: .02em; line-height: 1.15; }
 .page-head .lede { color: var(--ink-dim); font-style: italic; font-size: clamp(17px, 2vw, 20px); max-width: 620px; margin: 18px auto 0; }
 
 /* ornamental section divider (leaf · line · leaf), the brand mark */
-.ornament { display: flex; align-items: center; justify-content: center; gap: 16px; width: min(520px, 80%); margin: 48px auto; color: var(--cream); user-select: none; }
+.ornament { display: flex; align-items: center; justify-content: center; gap: 16px; width: min(520px, 80%); margin: 48px auto; color: var(--accent); user-select: none; }
 .ornament .leaf { font-size: 18px; line-height: 1; opacity: .9; }
-.ornament .rule { flex: 1; height: 2px; background: var(--cream); opacity: .8; }
+.ornament .rule { flex: 1; height: 2px; background: var(--accent); opacity: .85; }
 
 /* ============ Sections ============ */
 section { max-width: var(--maxw); margin: 0 auto; padding: clamp(40px, 7vw, 52px) clamp(20px, 5vw, 34px); }
@@ -153,7 +202,7 @@ section h2 { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); f
 .bullets li::before { content: '\2767'; position: absolute; left: 2px; top: 10px; color: var(--accent); font-size: 15px; }
 .bullets li.more { font-style: italic; }
 .bullets li.more::before { content: '\2192'; }
-.pill { display: inline-block; padding: 7px 18px; background: var(--cream-soft); color: var(--cream); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 4px; border: 1px solid rgba(213, 203, 180, .26); }
+.pill { display: inline-block; padding: 7px 18px; background: var(--accent-soft); color: var(--accent-bright); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 4px; border: 1px solid var(--accent); }
 .note { color: var(--ink-dim); font-style: italic; font-size: 15.5px; margin: 22px auto 0; max-width: 600px; }
 
 /* ============ Buttons ============ */
@@ -177,7 +226,7 @@ section h2 { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); f
   background: linear-gradient(180deg, var(--bg-card), var(--bg-elevated));
   border: 1px solid var(--border); border-radius: 10px; padding: 4px 30px 22px;
 }
-.group-eyebrow { color: var(--cream); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; margin: 26px 0 8px; text-align: center; }
+.group-eyebrow { color: var(--accent-bright); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; margin: 26px 0 8px; text-align: center; }
 .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 38px; }
 @media (max-width: 760px) { .fgrid { grid-template-columns: 1fr; } }
 .feature { padding: 16px 0; border-top: 1px solid var(--border); }
@@ -192,7 +241,7 @@ section h2 { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); f
 .price-card.span-full .btn { align-self: center; padding-left: 48px; padding-right: 48px; }
 @media (max-width: 620px) { .price-card.span-full .price-features { columns: 1; } }
 .price-card { background: linear-gradient(180deg, var(--bg-card), var(--bg-elevated)); border: 1px solid var(--border); border-radius: 10px; padding: 36px 30px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
-.price-card.featured { border-color: rgba(183, 144, 78, 0.5); }
+.price-card.featured { border-color: rgba(125, 90, 32, 0.55); }
 .price-tier { font-family: var(--display); font-size: 22px; color: var(--ink); margin: 0 0 4px; }
 .price-sub { color: var(--ink-dim); font-style: italic; font-size: 15.5px; margin: 0 0 22px; min-height: 22px; }
 .price-amount { font-family: var(--display); font-size: 40px; color: var(--accent-bright); line-height: 1; margin: 0 0 6px; }
