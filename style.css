@@ -1,24 +1,35 @@
 /* ============================================================
    Lectern — Necropolis Publishing
-   Shared stylesheet  ·  Gold Elegance
+   Shared stylesheet  ·  Lectern Dusk
    Eagle Lake (display) + Palatino (body)
+
+   The palette sits between the two Lectern presets the app ships. Lectern
+   Dark grounds on cobalt #171f29 and Lectern Light on parchment #eadfc6;
+   neither is comfortable for a long read on a lit screen, one being too deep
+   and the other too bright. Dusk lifts the cobalt and mutes the parchment so
+   body text lands near 10:1 rather than the 14.7:1 the old near-black ground
+   produced. Gold is the midpoint of the two preset accents, #a97e3c and
+   #c9a05d.
    ============================================================ */
 
 :root {
-  --bg: #0f1010;
-  --bg-hero: #1a1a1b;
-  --bg-card: #181819;
-  --bg-elevated: #1f1f20;
-  --ink: #e4e2db;
-  --ink-soft: #c9c7c0;
-  --ink-dim: #95938b;
-  --ink-faint: #6a6862;
-  --hero-gray: #6a6a6a;
-  --accent: #b08a4a;
-  --accent-bright: #c9a05d;
-  --accent-soft: rgba(176, 138, 74, 0.14);
-  --border: rgba(255, 255, 255, 0.09);
-  --shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
+  --bg: #1e252e;
+  --bg-hero: #232b35;
+  --bg-card: #242c36;
+  --bg-elevated: #2b343f;
+  --ink: #dcd4c4;
+  --ink-soft: #bdb6a8;
+  --ink-dim: #a09a8d;
+  --ink-faint: #948e82;
+  --hero-gray: #b7904e;
+  --accent: #b7904e;
+  --accent-bright: #c49b5c;
+  --accent-soft: rgba(183, 144, 78, 0.14);
+  /* Borders and shadow are parchment-tinted rather than pure white or pure
+     black, so edges sit on the ground instead of cutting across it. */
+  --border: rgba(220, 212, 196, 0.10);
+  --shadow: 0 14px 44px rgba(0, 0, 0, 0.42);
+  --selection: rgba(183, 144, 78, 0.28);
   --body: 'Palatino Linotype', Palatino, 'URW Palladio L', 'Noto Serif', Georgia, serif;
   --display: 'Eagle Lake', 'Palatino Linotype', Palatino, Georgia, serif;
   --maxw: 1080px;
@@ -38,6 +49,9 @@ html, body {
 }
 body { min-height: 100vh; }
 
+::selection { background: var(--selection); color: var(--ink); }
+::-moz-selection { background: var(--selection); color: var(--ink); }
+
 a { color: var(--accent-bright); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
 a:hover { border-bottom-color: var(--accent); }
 
@@ -45,7 +59,7 @@ a:hover { border-bottom-color: var(--accent); }
 header {
   position: sticky; top: 0; z-index: 100;
   backdrop-filter: blur(14px);
-  background: rgba(15, 16, 16, 0.82);
+  background: rgba(30, 37, 46, 0.82);
   border-bottom: 1px solid var(--border);
 }
 nav {
@@ -77,7 +91,7 @@ nav {
 /* ============ Hero (home — matches app welcome screen) ============ */
 .hero {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(176, 138, 74, 0.06), transparent 62%),
+    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(183, 144, 78, 0.07), transparent 62%),
     var(--bg-hero);
   border-bottom: 1px solid var(--border);
   padding: clamp(48px, 8vw, 64px) clamp(20px, 5vw, 32px) clamp(44px, 7vw, 60px);
@@ -92,7 +106,7 @@ nav {
   margin: 0; line-height: 1.1; opacity: 0; animation: rise .9s ease .18s forwards;
 }
 .hero-title .tm { font-family: var(--body); font-size: .26em; vertical-align: super; opacity: .6; margin-left: 4px; letter-spacing: 0; }
-.hero-tagline { font-style: italic; color: #7d7b74; font-size: clamp(17px, 2.2vw, 21px); margin: 14px 0 0; opacity: 0; animation: rise .9s ease .3s forwards; }
+.hero-tagline { font-style: italic; color: var(--ink-dim); font-size: clamp(17px, 2.2vw, 21px); margin: 14px 0 0; opacity: 0; animation: rise .9s ease .3s forwards; }
 .welcome-line {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: min(420px, 80%); margin: 30px auto 0; color: var(--accent);
@@ -133,7 +147,7 @@ section h2 { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); f
 .bullets li::before { content: '\2767'; position: absolute; left: 2px; top: 10px; color: var(--accent); font-size: 15px; }
 .bullets li.more { font-style: italic; }
 .bullets li.more::before { content: '\2192'; }
-.pill { display: inline-block; padding: 7px 18px; background: var(--accent-soft); color: var(--accent-bright); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 4px; border: 1px solid rgba(176,138,74,.3); }
+.pill { display: inline-block; padding: 7px 18px; background: var(--accent-soft); color: var(--accent-bright); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; border-radius: 4px; border: 1px solid rgba(183,144,78,.3); }
 .note { color: var(--ink-dim); font-style: italic; font-size: 15.5px; margin: 22px auto 0; max-width: 600px; }
 
 /* ============ Buttons ============ */
@@ -172,7 +186,7 @@ section h2 { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); f
 .price-card.span-full .btn { align-self: center; padding-left: 48px; padding-right: 48px; }
 @media (max-width: 620px) { .price-card.span-full .price-features { columns: 1; } }
 .price-card { background: linear-gradient(180deg, var(--bg-card), var(--bg-elevated)); border: 1px solid var(--border); border-radius: 10px; padding: 36px 30px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
-.price-card.featured { border-color: rgba(176, 138, 74, 0.5); }
+.price-card.featured { border-color: rgba(183, 144, 78, 0.5); }
 .price-tier { font-family: var(--display); font-size: 22px; color: var(--ink); margin: 0 0 4px; }
 .price-sub { color: var(--ink-dim); font-style: italic; font-size: 15.5px; margin: 0 0 22px; min-height: 22px; }
 .price-amount { font-family: var(--display); font-size: 40px; color: var(--accent-bright); line-height: 1; margin: 0 0 6px; }
