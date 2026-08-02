@@ -1,5 +1,5 @@
 /* ============================================================
-   Lectern — Necropolis Publishing
+   Lectern · Necropolis Publishing
    Shared stylesheet  ·  Gold Elegance
    Eagle Lake (display) + Palatino (body)
    ============================================================ */
@@ -58,7 +58,17 @@ nav {
 .crumb:hover { border: none; }
 .crumb-icon { width: 26px; height: 26px; display: block; }
 .crumb-word { font-size: 20px; letter-spacing: .04em; color: var(--ink); line-height: 1; transition: color .2s; }
-.crumb-np .crumb-word { font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif; text-transform: uppercase; letter-spacing: .09em; }
+.crumb-np .crumb-word {
+  font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif;
+  letter-spacing: .04em;
+  /* Reads 'Home', not 'HOME': the uppercase here dated from when this crumb
+     carried the Necropolis wordmark. Small caps keep the H at full height and
+     drop 'ome' to small capitals. Cinzel ships no true small-cap glyphs, so
+     the browser synthesizes them by scaling the capitals; font-synthesis is
+     left on for that reason. */
+  font-variant-caps: small-caps;
+  font-synthesis: small-caps;
+}
 .crumb-lectern .crumb-word { font-family: var(--display); }
 .crumb:hover .crumb-word { color: var(--accent-bright); }
 .crumb-sep { color: var(--accent); font-size: 20px; line-height: 1; opacity: .6; user-select: none; }
@@ -74,7 +84,7 @@ nav {
   .nav-links a { font-size: 15px; }
 }
 
-/* ============ Hero (home — matches app welcome screen) ============ */
+/* ============ Hero (home: matches app welcome screen) ============ */
 .hero {
   background:
     radial-gradient(ellipse 70% 55% at 50% 20%, rgba(176, 138, 74, 0.06), transparent 62%),
@@ -108,7 +118,7 @@ nav {
 .page-head h1 { font-family: var(--display); font-size: clamp(30px, 4.6vw, 46px); font-weight: 400; color: var(--ink); margin: 0; letter-spacing: .02em; line-height: 1.15; }
 .page-head .lede { color: var(--ink-dim); font-style: italic; font-size: clamp(17px, 2vw, 20px); max-width: 620px; margin: 18px auto 0; }
 
-/* ornamental section divider (leaf · line · leaf) — the brand mark */
+/* ornamental section divider (leaf · line · leaf), the brand mark */
 .ornament { display: flex; align-items: center; justify-content: center; gap: 16px; width: min(520px, 80%); margin: 48px auto; color: var(--accent); user-select: none; }
 .ornament .leaf { font-size: 18px; line-height: 1; opacity: .9; }
 .ornament .rule { flex: 1; height: 2px; background: var(--accent); opacity: .85; }
